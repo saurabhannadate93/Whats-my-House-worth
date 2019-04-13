@@ -9,7 +9,7 @@ It is often expensive, and sometimes impossible for a real estate company/agency
 ### Mission
 The mission is to build an algorithm which would help accurately predict the intrinsic value of a property based on certain characteristics like property type, no. of floors, age etc. and develop a user interface to administer the solution.
 
-###Success Criteria
+### Success Criteria
 
 **Model Criterion**: Our model is successful if the R-square evaluation metric exceeds 60%. 
 
