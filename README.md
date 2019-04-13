@@ -54,6 +54,7 @@ Sprint Sizing Legend:
 * EPIC 1 : Story 3 : Exploratory Data Analysis (4) : Sprint 1
 * EPIC 1 : Story 4 : Testing different model architectures and parameter tuning (8) : Sprint 1
 * EPIC 1 : Story 5 : Model performance tests (2) : Sprint 1
+* EPIC 2 : Story 1 : Environment Setup : requirement.txt files
 * EPIC 2 : Story 2 : Set up a S3 instance
 * EPIC 2 : Story 3 : Initialize RDS database
 * EPIC 2 : Story 4 : Deploy model using Flask
