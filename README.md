@@ -1,5 +1,8 @@
 # Property-Valuation-Estimation
 
+Project owner: Saurabh Annadate
+QA: Tanya Tandon 
+
 ## Project Charter
 
 ### Vision
