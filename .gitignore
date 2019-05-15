@@ -8,10 +8,8 @@ __pycache__/
 .idea
 *.ipynb
 .ipynb_checkpoints/
-data/*
-!data/sample/
-!data/auxiliary
+data/usage_log/
+data/raw/
 models/*
-test/model/test/*
 !.gitkeep
-.idea
+
