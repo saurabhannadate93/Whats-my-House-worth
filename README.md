@@ -37,9 +37,9 @@ The mission is to build an algorithm which would help accurately predict the int
 ### Theme: Develop and deploy a platform that helps estimate the valuation of a property based on certain characteristics. 
 
 1. __EPIC 1: Model Building and Optimization__
-    * Story 1 : Data Cleaning and missing value imputation
-    * Story 2 : Feature Generation
-    * Story 3 : Exploratory Data Analysis
+    * Story 1 : Data Visualization
+    * Story 2 : Data Cleaning and missing value imputation
+    * Story 3 : Feature Generation
     * Story 4 : Testing different model architectures and parameter tuning
     * Story 5 : Model performance tests to check the model run times
    
@@ -66,19 +66,19 @@ Sprint Sizing Legend:
 * 4 points ~ 1 day (large)
 * 8 points - big and needs to be broken down more when it comes to execution (okay as placeholder for future work though)
 ------------------
-* EPIC 1 : Story 1 : Data Cleaning and missing value imputation (2) : Sprint 1
-* EPIC 1 : Story 2 : Feature Generation (2) : Sprint 1
-* EPIC 1 : Story 3 : Exploratory Data Analysis (4) : Sprint 1
-* EPIC 1 : Story 4 : Testing different model architectures and parameter tuning (8) : Sprint 1
-* EPIC 1 : Story 5 : Model performance tests (2) : Sprint 1
-* EPIC 2 : Story 1 : Environment Setup : requirement.txt files
-* EPIC 2 : Story 2 : Set up a S3 instance
-* EPIC 2 : Story 3 : Initialize RDS database
-* EPIC 2 : Story 4 : Deploy model using Flask
-* EPIC 2 : Story 5 : Development of unit tests and integrated tests
-* EPIC 3 : Story 1 : Develop a basic form to input data and output results
-* EPIC 2 : Story 6 : Setup usage logs
-* EPIC 2 : Story 7 : Solution reproducibility tests
+* EPIC 2 : Story 2 : Set up a S3 instance (1) : Sprint 1 (Completed)
+* EPIC 2 : Story 3 : Initialize RDS database(1) : Sprint 1 (Completed)
+* EPIC 1 : Story 1 : Exploratory Data Analysis (2) : Sprint 1 (Completed)
+* EPIC 1 : Story 2 : Data Cleaning and missing value imputation (2) : Sprint 1 (Completed)
+* EPIC 2 : Story 1 : Environment Setup : requirement.txt files (1) : Sprint 1 (Completed)
+* EPIC 1 : Story 3 : Feature Generation (2) : Sprint 2
+* EPIC 1 : Story 4 : Testing different model architectures and parameter tuning (8) : Sprint 2
+* EPIC 1 : Story 5 : Model performance tests (2) : Sprint 2
+* EPIC 2 : Story 4 : Deploy model using Flask (2) : Sprint 2
+* EPIC 2 : Story 5 : Development of unit tests and integrated tests (4) : Sprint 2
+* EPIC 3 : Story 1 : Develop a basic form to input data and output results (2) : Sprint 2
+* EPIC 2 : Story 6 : Setup usage logs (2) : Sprint 2
+* EPIC 2 : Story 7 : Solution reproducibility tests (4) : Sprint 2
 
 ### IceBox 
 * EPIC 3 : Story 2 : Add styling/colors to make the interface more visually appealing
