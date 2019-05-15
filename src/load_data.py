@@ -19,7 +19,7 @@ def run_loading_local():
     Returns:
         None
     '''
-
+    logger.debug('Running the run_loading_local function')
     s3 = boto3.client('s3')
     for object in s3.list_objects_v2(Bucket=config.SOURCE_BUCKET)['Contents']:
         try: 
@@ -47,6 +47,7 @@ def run_loading_AWS(bucket_name):
     Returns:
         None
     '''
+    logger.debug('Running the run_loading_AWS function')
     s31 = boto3.client('s3')
     s32 = boto3.resource('s3')
     for object in s31.list_objects_v2(Bucket=config.SOURCE_BUCKET)['Contents']:
@@ -64,12 +65,12 @@ def run_loading(args):
     '''Fetches the data from the raw source and dumps it at the location specified
     
     Args:
-        args: Argparse args - should include args.where, args.bucket
+        args: Argparse args - includes args.where, args.manual
         
     Returns:
         None
     '''
-    logger.info('Running the run_loading function')
+    logger.debug('Running the run_loading function')
       
     if args.where == "Local":
         run_loading_local()
@@ -88,3 +89,6 @@ if __name__ == "__name__":
     sb_fetch.add_argument("--where", default="Local", help="'Local' or 'AWS'; bucket name needs to be provided in case of AWS")
     sb_fetch.add_argument("--bucket", default="None", help="S3 bucket name")
     sb_fetch.set_defaults(func=run_loading)
+    
+    args = parser.parse_args()
+    args.func(args)

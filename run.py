@@ -13,7 +13,7 @@ import logging
 import logging.config
 
 # The logging configurations are called from local.conf
-logging.config.fileConfig(os.1path.join("config","logging_local.conf"))
+logging.config.fileConfig(os.path.join("config","logging_local.conf"))
 logger = logging.getLogger(config.LOGGER_NAME)
 
 from src.load_data import run_loading
@@ -24,17 +24,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run components of the run source code")
     subparsers = parser.add_subparsers()
     
-    # Sub-parser for ingesting new data
+    # Sub-parser for downloading the raw data
     sb_fetch = subparsers.add_parser("fetch", description="Fetch the raw data from the source")
-    sb_fetch.add_argument("--where", default="Local", help="'Local' or 'AWS'; bucket name needs to be provided in case of AWS")
-    sb_fetch.add_argument("--bucket", default="None", help="S3 bucket name")
+    sb_fetch.add_argument("--where", default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sb_fetch.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sb_fetch.set_defaults(func=run_loading)
 
     
     # Sub-parser for creating a database
-    sb_create = subparsers.add_parser("create_db", description="Create database")
-    sb_ingest.add_argument("--where", default="Local", help="'Local' or 'AWS'; RDS host name needs to be provided in case of AWS")
-    sb_ingest.add_argument("--rds_host", default="None", help="RDS Host name")
+    sb_create = subparsers.add_parser("create_db", description="Create database to track usage logs")
+    sb_create.add_argument("--where", default="Local", help="'Local' or 'AWS'")
+    sb_create.add_argument("--manual", default="no", help="Set as 'yes' if manually inputing RDS db credentials. Seeks variables from environment by default")
     sb_create.set_defaults(func=create_db)
 
     args = parser.parse_args()
