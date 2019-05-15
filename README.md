@@ -165,34 +165,16 @@ Original Data Source: [Kaggle](https://www.kaggle.com/c/house-prices-advanced-re
 For the ease of downloading, the raw data has been downloaded and placed in a public s3 bucket: **s3://housing-prices-data** 
 
 #### Local
-```
+Run the following command in bash:
+```bash
 python run.py fetch
 ```
 Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
 
 
 #### AWS
-```
-python run.py fetch --where=AWS --bucket=<destination_bucket_name>
-```
-Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
-
-
-### 2. Download the data
-
-Original Data Source: [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
-
-For the ease of downloading, the raw data has been downloaded and placed in a public s3 bucket: **s3://housing-prices-data** 
-
-#### Local
-```
-python run.py fetch
-```
-Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
-
-
-#### AWS
-```
+Run the following command in bash:
+```bash
 python run.py fetch --where=AWS --bucket=<destination_bucket_name>
 ```
 Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
@@ -200,10 +182,11 @@ Running this code will download the raw data from the s3 bucket and will put it 
 ### 3. Initialize the database
 
 #### Local
-```
+Run the following command in bash:
+```bash
 python run.py create_db
 ```
-Running this code will create a sqlite database to log the app usage: **/Data/usage_log/msia423.db**
+Running this code will create a sqlite database to log the app usage at: **/Data/usage_log/msia423.db**
 
 
 #### AWS
@@ -215,11 +198,12 @@ There are two ways that a database can be initialized in AWS.
 This requires the following environment variables to be set in advance of running the code:
 * MYSQL_USER : *Username to access the RDS instance*
 * MYSQL_PASSWORD : *Password to access the RDS instance*
-* MYSQL_HOSE : *RDS instance endpoinr*
+* MYSQL_HOST : *RDS instance endpoinr*
 * MYSQL_PORT : *Port number to access the instance*
 * MYSQL_DB : *Name of the database*
 
-```
+After the environment variables have been set, run the following command in bash:
+```bash
 python run.py create_db --where=AWS
 ```
 Running this code will create the database specified in the given RDS instance 
@@ -227,7 +211,7 @@ Running this code will create the database specified in the given RDS instance
 
 ##### - User input:
 
-This requires the following environment variables to be set in advance of running the code:
+This does not require you to set the environment variables in advance. Run the following command in bash:
 ```
 python run.py create_db --where=AWS --manual=yes
 ```
