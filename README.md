@@ -1,7 +1,21 @@
 # Property-Valuation-Estimation
 
-#### Project owner: Saurabh Annadate
-#### QA: Tanya Tandon 
+## Team Members
+#### Project lead: Saurabh Annadate
+#### QA lead: [Tanya Tandon](https://github.com/TanyaTandon) 
+
+
+## Index
+<!-- toc -->
+
+- [Project Charter](#project-charter)
+- [Project Plan](#project-plan)
+- [Repo structure](#repo-structure)
+- [Running the application](#running-the-application)
+  * [1. Set up environment](#1-set-up-environment)
+  * [2. Download the data](#2-download-the-data)
+  * [3. Initialize the database](#3-initialize-the-database)
+
 
 ## Project Charter
 
@@ -42,7 +56,7 @@ The mission is to build an algorithm which would help accurately predict the int
     * Story 1 : Develop a basic form to input data and output results
     * Story 2 : Add styling/colors to make the interface more visually appealing  
 
-## Backlog
+### Backlog
 
 Sprint Sizing Legend:
 
@@ -66,7 +80,173 @@ Sprint Sizing Legend:
 * EPIC 2 : Story 6 : Setup usage logs
 * EPIC 2 : Story 7 : Solution reproducibility tests
 
-## IceBox 
+### IceBox 
 * EPIC 3 : Story 2 : Add styling/colors to make the interface more visually appealing
+
+## Repo structure 
+
+```
+├── README.md                         <- You are here
+│
+├── app
+│   ├── static/                       <- CSS, JS files that remain static 
+│   ├── templates/                    <- HTML (or other code) that is templated and changes based on a set of inputs
+│   ├── models.py                     <- Creates the data model for the database connected to the Flask app 
+│
+├── config                            <- Directory for yaml configuration files for model training, scoring, etc
+│   ├── logging.conf                  <- Configuration files for python loggers
+│   ├── config.py                     <- Contains all other configurations
+│
+├── data                              <- Folder that contains data used or generated. Only the external/ and sample/ subdirectories are tracked by git. 
+│   ├── raw/                          <- Place to put raw data used for training the model 
+│   ├── usage_log/                    <- Contains sqlite database usage_log.db which tracks all usage statistics
+│
+├── deliverables                      <- Contains all deliverables.
+│
+├── docs                              <- A default Sphinx project; see sphinx-doc.org for details.
+│
+├── figures                           <- Generated graphics and figures to be used in reporting.
+│
+├── models                            <- Trained model objects (TMOs), model predictions, and/or model summaries
+│   ├── archive                       <- No longer current models. This directory is included in the .gitignore and is not tracked by git
+│
+├── notebooks
+│   ├── develop                       <- Current notebooks being used in development.
+│   ├── deliver                       <- Notebooks shared with others. 
+│   ├── archive                       <- Develop notebooks no longer being used. 
+│
+├── src                               <- Source data for the project 
+│   ├── archive/                      <- No longer current scripts.
+│   ├── helpers/                      <- Helper scripts used in main src files 
+│   ├── sql/                          <- SQL source code
+│   ├── load_data.py                  <- Script for downloading data from the input source 
+│   ├── log_usage_data.py             <- Script for building the usage log database and injesting data in it
+│
+├── test                              <- Files necessary for running model tests 
+│
+├── run.py                            <- Simplifies the execution of one or more of the src scripts 
+│
+├── requirements.txt                  <- Python package dependencies 
+```
+
+## Running the application
+
+Ths application can be run on both local system as well as on AWS. Steps on how to deploy the app for both settings is given below.
+
+### 1. Set up environment 
+
+The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. 
+
+#### With `virtualenv`
+
+```bash
+pip install virtualenv
+
+virtualenv housePrices
+
+source housePrices/bin/activate
+
+pip install -r requirements.txt
+
+```
+#### With `conda`
+
+```bash
+conda create -n housePrices python=3.7.3
+conda activate housePrices
+pip install -r requirements.txt
+
+```
+
+### 2. Download the data
+
+Original Data Source: [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+For the ease of downloading, the raw data has been downloaded and placed in a public s3 bucket: **s3://housing-prices-data** 
+
+#### Local
+```
+python run.py fetch
+```
+Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
+
+
+#### AWS
+```
+python run.py fetch --where=AWS --bucket=<destination_bucket_name>
+```
+Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
+
+
+### 2. Download the data
+
+Original Data Source: [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+For the ease of downloading, the raw data has been downloaded and placed in a public s3 bucket: **s3://housing-prices-data** 
+
+#### Local
+```
+python run.py fetch
+```
+Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
+
+
+#### AWS
+```
+python run.py fetch --where=AWS --bucket=<destination_bucket_name>
+```
+Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
+
+### 3. Initialize the database
+
+#### Local
+```
+python run.py create_db
+```
+Running this code will create a sqlite database to log the app usage: **/Data/usage_log/msia423.db**
+
+
+#### AWS
+
+There are two ways that a database can be initialized in AWS.
+
+##### - Take configurations from the environment:
+
+This requires the following environment variables to be set in advance of running the code:
+* MYSQL_USER : *Username to access the RDS instance*
+* MYSQL_PASSWORD : *Password to access the RDS instance*
+* MYSQL_HOSE : *RDS instance endpoinr*
+* MYSQL_PORT : *Port number to access the instance*
+* MYSQL_DB : *Name of the database*
+
+```
+python run.py create_db --where=AWS
+```
+Running this code will create the database specified in the given RDS instance 
+
+
+##### - User input:
+
+This requires the following environment variables to be set in advance of running the code:
+```
+python run.py create_db --where=AWS --manual=yes
+```
+The prompt will ask you to enter the details for establishing the connection to the RDS instance, post which the database will be created. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

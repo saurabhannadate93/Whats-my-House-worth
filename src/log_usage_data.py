@@ -22,7 +22,7 @@ class usage_log(Base):
     __tablename__ = 'usage_log'
     
     Usage_id = Column(Integer, primary_key=True, autoincrement=True, nullable = False)
-    timestamp = Column(DateTime, default=datetime.datetime.utcnow, unique=False, nullable=False)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow(), unique=False, nullable=False)
     MSSubClass = Column(String(100), unique=False, nullable=False)
     MSZoning = Column(String(100), unique=False, nullable=False)
     LotFrontage = Column(Integer, unique=False, nullable=False)
