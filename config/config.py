@@ -5,8 +5,7 @@ LOGGER_NAME = 'root'
 SOURCE_BUCKET = "housing-prices-data"
 
 #Database Configurations
-SQLALCHEMY_DATABASE_URI = 'sqlite:///data/usage_log/usage_log.db'
-SQLALCHEMY_DATABASE_NAME = 'usage_log.db'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///data/usage_log/msia423.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SQLALCHEMY_ECHO = False  # If true, SQL for queries made will be printed
 

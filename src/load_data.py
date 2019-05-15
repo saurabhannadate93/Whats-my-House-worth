@@ -78,6 +78,8 @@ def run_loading(args):
     elif args.where == "AWS":
         run_loading_AWS(args.bucket)
             
+    else:
+        raise ValueError('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
         
 if __name__ == "__name__":
     
