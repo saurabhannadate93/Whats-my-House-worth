@@ -219,7 +219,7 @@ The prompt will ask you to enter the details for establishing the connection to 
 
 ## Exploratory Data Analysis
 
-[Link to the EDA notebook](deliverables/EDA/Exploratory Data Analysis.md) 
+[Link to the EDA notebook](deliverables/EDA/Exploratory_Data_Analysis.md) 
 
 
 
