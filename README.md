@@ -1,4 +1,4 @@
-# Property-Valuation-Estimation
+# House-Pricing-Estimation
 
 ## Team Members
 #### Project lead: Saurabh Annadate
@@ -20,17 +20,17 @@
 ## Project Charter
 
 ### Vision
-Real estate agencies require accurate estimation of the intrinsic value of a property to decide whether it is undervalued or not before making an investment decision. It is often expensive, and sometimes impossible to send down someone to inspect a property to do the same. Our vision is to develop a platform which would help estimate the true value of a property based on certain property characteristics to help drive investment decisions, increase profits and reduce costs.
+Real estate agencies require accurate estimation of the price of a property to decide whether it is undervalued or not before making an investment decision. House pricing decisions are often subjective and can lead to bad investment decisions. Our vision is to develop a platform which would help estimate the price of a property based on certain property characteristics to help drive investment decisions, increase profits and reduce costs.
 
 
 ### Mission
-The mission is to build an algorithm which would help accurately predict the intrinsic value of a property based on certain characteristics like property type, no. of floors, age etc. and develop a user interface to administer the solution so that real estate agents can use it to estimate the intrinsic value of a property.
+The mission is to build an algorithm which would help accurately predict the price of a property based on certain characteristics like property type, no. of floors, age etc. and develop a user interface to administer the solution so that real estate agents can use it to estimate the price of a property.
 
 ### Success Criteria
 
 **Model Criterion**: Our model is successful if the R-square evaluation metric exceeds 60%. 
 
-**Desired Business Outcomes**: A long term indication of the model's impact on the business would be a simultaneous reduction in the operating costs by the virtue of the reduced requirement for personnel to visit the properties in person while reducing the percentage of bad investment decisions.  
+**Desired Business Outcomes**: A Key Performance Indicator of the success of the app would be continual increase in it's adoption to drive business decisions by the various Real Estate agencies. This would be a good indicator of the model's accuracy performance as well. The intention is to deploy the app at a particular location, and based on the performance expand to other areas.    
 
 ## Project Plan
 
