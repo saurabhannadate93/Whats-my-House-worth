@@ -15,7 +15,7 @@
   * [1. Set up environment](#1-set-up-environment)
   * [2. Download the data](#2-download-the-data)
   * [3. Initialize the database](#3-initialize-the-database)
-
+- [Exploratory Data Analysis](#exploratory-data-analysis)
 
 ## Project Charter
 
@@ -217,7 +217,9 @@ python run.py create_db --where=AWS --manual=yes
 ```
 The prompt will ask you to enter the details for establishing the connection to the RDS instance, post which the database will be created. 
 
+## Exploratory Data Analysis
 
+[Link to the EDA notebook](deliverables/EDA/Exploratory Data Analysis.md) 
 
 
 
