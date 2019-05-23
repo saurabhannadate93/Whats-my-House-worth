@@ -164,6 +164,8 @@ Original Data Source: [Kaggle](https://www.kaggle.com/c/house-prices-advanced-re
 
 For the ease of downloading, the raw data has been downloaded and placed in a public s3 bucket: **s3://housing-prices-data** 
 
+**Note:** AWS CLI needs to be configured in your system for you to fetch the data. Kindly refer to this [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to set up the same.  
+
 #### Local
 Run the following command in bash:
 ```bash
