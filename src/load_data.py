@@ -80,17 +80,3 @@ def run_loading(args):
             
     else:
         raise ValueError('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
-        
-if __name__ == "__name__":
-    
-    parser = argparse.ArgumentParser(description="Load Data")
-    subparsers = parser.add_subparsers()
-    
-    # Sub-parser for ingesting new data
-    sb_fetch = subparsers.add_parser("fetch", description="Fetch the raw data from the source")
-    sb_fetch.add_argument("--where", default="Local", help="'Local' or 'AWS'; bucket name needs to be provided in case of AWS")
-    sb_fetch.add_argument("--bucket", default="None", help="S3 bucket name")
-    sb_fetch.set_defaults(func=run_loading)
-    
-    args = parser.parse_args()
-    args.func(args)

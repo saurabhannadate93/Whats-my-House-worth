@@ -162,17 +162,3 @@ def create_db(args):
         except Exception as e:
             logger.error("Database could not be created. Kindly check the configurations and try again.")
             logger.error(e)
-    
-if __name__ == "__main__":
-    
-    parser = argparse.ArgumentParser(description="Run components of the log usage data code")
-    subparsers = parser.add_subparsers()
-    
-    # Sub-parser for creating a database
-    sb_create = subparsers.add_parser("create_db", description="Create database to track usage logs")
-    sb_create.add_argument("--where", default="Local", help="'Local' or 'AWS'")
-    sb_create.add_argument("--manual", default="no", help="Set as 'yes' if manually inputing RDS db credentials. Seeks variables from environment by default")
-    sb_create.set_defaults(func=create_db)
-
-    args = parser.parse_args()
-    args.func(args)
