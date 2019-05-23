@@ -11,4 +11,4 @@ models/*
 !.gitkeep
 data/raw/*
 data/usage_log/*
-
+.vscode/
