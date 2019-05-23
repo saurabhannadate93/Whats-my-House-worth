@@ -6,12 +6,9 @@ __pycache__/
 .log
 .png
 .idea
-*.ipynb
 .ipynb_checkpoints/
-data/*
-!data/sample/
-!data/auxiliary
 models/*
-test/model/test/*
 !.gitkeep
-.idea
+data/raw/*
+data/usage_log/*
+.vscode/
