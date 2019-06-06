@@ -1,0 +1,187 @@
+<!––https://www.w3schools.com/howto/howto_css_responsive_form.asp––>
+
+<!DOCTYPE html>
+<html lang="en">
+<script LANGUAGE="JavaScript">
+      var start = 1800;
+      var end = new Date().getFullYear();
+      var options = "";
+      for(var year = start ; year <=end; year++){
+         options += "<option>"+ year +"</option>";
+      }
+      document.getElementById("year").innerHTML = options;
+      </script>
+<head>
+    <meta charset="UTF-8">
+    <link href="static/basic.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <h3>
+         <a href = "{{ url_for('index') }}">Housing Price Predictor</a>
+    </h3>
+
+    <hr/>
+
+    <div class="container">
+      <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+        <div class="row">
+          <div class="col-25">
+            <label for="GrLivArea">Above grade (ground) living area square feet</label>
+         </div>
+          <div class="col-75">
+            <input type="number" id="FillBox" name="GrLivArea" placeholder=0>
+          </div>
+        </div>
+        <br>
+        
+        <div class="row">
+         <div class="col-25">
+           <label for="GarageCars">Size of garage in car capacity</label>
+         </div>
+         <div class="col-75">
+            <select id="GarageCars" name="GarageCars">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+            </select>
+       </div>
+       <br>
+
+       <div class="col-25">
+         <label for="TotalBsmtSF">Total square feet of basement area</label>
+       </div>
+       <div class="col-75">
+         <input type="number" id="FillBox" name="TotalBsmtSF" placeholder=0>
+       </div>
+     </div>
+     <br>
+
+     <div class="col-25">
+      <label for="YearBuilt">Year Built</label>
+    </div>
+    <div class="col-75">   
+      <select id="year"></select>
+    </div>
+  </div>
+  <br>
+
+  <div class="col-25">
+      <label for="1stFlrSF">First Floor square feet</label>
+    </div>
+    <div class="col-75">
+      <input type="number" id="FillBox" name="1stFlrSF" placeholder=0>
+    </div>
+  </div>
+  <br>
+
+  <div class="col-25">
+      <label for="1stFlrSF">First Floor square feet</label>
+    </div>
+    <div class="col-75">
+      <input type="number" id="FillBox" name="1stFlrSF" placeholder=0>
+    </div>
+  </div>
+  <br>
+
+  <div class="col-25">
+      <label for="GarageArea">Size of garage in square feet</label>
+    </div>
+    <div class="col-75">
+      <input type="number" id="FillBox" name="GarageArea" placeholder=0>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+      <div class="col-25">
+        <label for="FullBath">Full bathrooms above grade</label>
+      </div>
+      <div class="col-75">
+         <select id="GarageCars" name="GarageCars">
+           <option value=0>0</option>
+           <option value=1>1</option>
+           <option value=2>2</option>
+           <option value=3>3</option>
+           <option value=4>4</option>
+           <option value=5>5</option>
+           <option value=6>6</option>
+           <option value=7>7</option>
+           <option value=8>8</option>
+           <option value=9>9</option>
+           <option value=0>10</option>
+         </select>
+    </div>
+    <br>
+
+    <div class="row">
+         <div class="col-25">
+           <label for="TotRmsAbvGrd">Total rooms above ground</label>
+         </div>
+         <div class="col-75">
+            <select id="TotRmsAbvGrd" name="TotRmsAbvGrd">
+              <option value=0>0</option>
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+              <option value=5>5</option>
+              <option value=6>6</option>
+              <option value=7>7</option>
+              <option value=8>8</option>
+              <option value=9>9</option>
+              <option value=0>10</option>
+            </select>
+       </div>
+       <br>
+
+       <div class="col-25">
+            <label for="LotArea">Lot size in square feet</label>
+          </div>
+          <div class="col-75">
+            <input type="number" id="FillBox" name="LotArea" placeholder=0>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-25">
+              <label for="FirePlaces">Number of Fireplaces</label>
+            </div>
+            <div class="col-75">
+               <select id="FirePlaces" name="FirePlaces">
+                 <option value=0>0</option>
+                 <option value=1>1</option>
+                 <option value=2>2</option>
+                 <option value=3>3</option>
+                 <option value=4>4</option>
+                 <option value=5>5</option>
+                 <option value=6>6</option>
+                 <option value=7>7</option>
+                 <option value=8>8</option>
+                 <option value=9>9</option>
+                 <option value=0>10</option>
+               </select>
+          </div>
+          <br>
+   
+      </form>
+    </div>
+
+    </form>
+    <h4>Predicted House Price: {{ predicted_price }}</h4>
+</body>
+</html>
