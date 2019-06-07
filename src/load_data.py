@@ -5,12 +5,11 @@ This module contains functions to load the raw data from the source and dump it 
 import os
 import logging
 import boto3
-import config.config as config
-
+import yaml
 
 logger = logging.getLogger(__name__)
 
-def run_loading_local():
+def run_loading_local(config):
     '''Fetches the data from the raw source and dumps it on the local drive
     
     Args:
@@ -20,23 +19,24 @@ def run_loading_local():
         None
     '''
     logger.debug('Running the run_loading_local function')
+    
     s3 = boto3.client('s3')
-    for object in s3.list_objects_v2(Bucket=config.SOURCE_BUCKET)['Contents']:
+    for object in s3.list_objects_v2(Bucket=config['load_data']['SOURCE_BUCKET'])['Contents']:
         try: 
-            logger.info("Downloading %s from bucket %s", object['Key'], config.SOURCE_BUCKET)
-            s3.download_file(config.SOURCE_BUCKET, object['Key'], os.path.join("data", "raw", object['Key']))
+            logger.info("Downloading %s from bucket %s", object['Key'], config['load_data']['SOURCE_BUCKET'])
+            s3.download_file(config['load_data']['SOURCE_BUCKET'], object['Key'], os.path.join("data", "raw", object['Key']))
             logger.info("File successfully downloaded to %s", os.path.join("data", "raw"))
 
         except ClientError as e:
             if e.response['Error']['Code'] == "404":
-                logger.warning("The object %s does not exist in AWS bucket %s.", object['Key'], config.SOURCE_BUCKET)
+                logger.warning("The object %s does not exist in AWS bucket %s.", object['Key'], config['load_data']['SOURCE_BUCKET'])
             else:
                 raise
         
         except Exception as e:
             logger.error(e)
 
-def run_loading_AWS(bucket_name):
+def run_loading_AWS(config, bucket_name):
     '''Fetches the data from the raw source and dumps it on the AWS s3 bucket provided
     
     All data is dumped at <s3-bucket name>/data/raw
@@ -48,13 +48,14 @@ def run_loading_AWS(bucket_name):
         None
     '''
     logger.debug('Running the run_loading_AWS function')
+    
     s31 = boto3.client('s3')
     s32 = boto3.resource('s3')
-    for object in s31.list_objects_v2(Bucket=config.SOURCE_BUCKET)['Contents']:
+    for object in s31.list_objects_v2(Bucket=config['load_data']['SOURCE_BUCKET'])['Contents']:
         try:
-            copy_source = {'Bucket': config.SOURCE_BUCKET, 'Key': object['Key']}
+            copy_source = {'Bucket': config['load_data']['SOURCE_BUCKET'], 'Key': object['Key']}
             bucket = s32.Bucket(bucket_name)
-            logger.info("Copying %s from bucket %s to bucket %s", object['Key'], config.SOURCE_BUCKET, bucket_name)
+            logger.info("Copying %s from bucket %s to bucket %s", object['Key'], config['load_data']['SOURCE_BUCKET'], bucket_name)
             bucket.copy(copy_source, "data/raw/" + object['Key'])
             logger.info("File successfully copied.")
         
@@ -71,12 +72,15 @@ def run_loading(args):
         None
     '''
     logger.debug('Running the run_loading function')
-      
+
+    with open(os.path.join("config","config.yml"), "r") as f:
+        config = yaml.safe_load(f)
+
     if args.where == "Local":
-        run_loading_local()
+        run_loading_local(config)
     
     elif args.where == "AWS":
-        run_loading_AWS(args.bucket)
+        run_loading_AWS(config, args.bucket)
             
     else:
         raise ValueError('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')

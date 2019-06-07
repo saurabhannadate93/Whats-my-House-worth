@@ -6,7 +6,7 @@ import datetime
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float
 from sqlalchemy.ext.declarative import declarative_base
 
-import config.config as config
+import yaml
 import argparse
 
 import getpass
@@ -110,12 +110,15 @@ def create_db(args):
     Returns:
         None
     """
+    with open(os.path.join("config","config.yml"), "r") as f:
+        config = yaml.safe_load(f)
+
     logger.debug('Running the create_db function')
     
     if args.where == "Local":
         try:
-            logger.info('Creating a local database at {}'.format(config.SQLALCHEMY_DATABASE_URI))
-            engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
+            logger.info('Creating a local database at {}'.format(config['db_config']['SQLALCHEMY_DATABASE_URI']))
+            engine = create_engine(config['db_config']['SQLALCHEMY_DATABASE_URI'])
             logger.debug('Database engine successfully created.')            
         except Exception as e:
             logger.error(e)
