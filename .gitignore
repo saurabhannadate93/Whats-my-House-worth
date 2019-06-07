@@ -10,5 +10,5 @@ __pycache__/
 models/*
 !.gitkeep
 data/raw/*
-data/usage_log/*
+database/usage_log/*
 .vscode/
