@@ -3,7 +3,7 @@ import logging
 import logging.config
 import datetime
 
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float
+from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 
 import yaml
@@ -22,83 +22,23 @@ class usage_log(Base):
     __tablename__ = 'usage_log'
     
     Usage_id = Column(Integer, primary_key=True, autoincrement=True, nullable = False)
-    timestamp = Column(DateTime, default=datetime.datetime.utcnow(), unique=False, nullable=False)
-    MSSubClass = Column(String(100), unique=False, nullable=False)
-    MSZoning = Column(String(100), unique=False, nullable=False)
-    LotFrontage = Column(Integer, unique=False, nullable=False)
+    timestamp = Column(String(100), unique=False, nullable=False)
     LotArea = Column(Integer, unique=False, nullable=False)
-    Street = Column(String(20), unique=False, nullable=False)
-    Alley = Column(String(20), unique=False, nullable=False)
-    LotShape = Column(String(100), unique=False, nullable=False)
-    LandContour = Column(String(100), unique=False, nullable=False)
-    Utilities = Column(String(100), unique=False, nullable=False)
-    LotConfig = Column(String(100), unique=False, nullable=False)
-    LandSlope = Column(String(100), unique=False, nullable=False)
-    BldgType = Column(String(100), unique=False, nullable=False)
-    HouseStyle = Column(String(100), unique=False, nullable=False)
-    OverallQual = Column(Integer, unique=False, nullable=False)
-    OverallCond = Column(Integer, unique=False, nullable=False)
     YearBuilt = Column(String(100), unique=False, nullable=False)
-    YearRemodAdd = Column(String(100), unique=False, nullable=False)
-    RoofStyle = Column(String(100), unique=False, nullable=False)
-    RoofMatl = Column(String(100), unique=False, nullable=False)
-    Exterior1st = Column(String(100), unique=False, nullable=False)
-    Exterior2nd = Column(String(100), unique=False, nullable=False)
-    MasVnrType = Column(String(100), unique=False, nullable=False)
-    MasVnrArea = Column(Integer, unique=False, nullable=False)
-    ExterQual = Column(String(100), unique=False, nullable=False)
-    ExterCond = Column(String(100), unique=False, nullable=False)
-    Foundation = Column(String(100), unique=False, nullable=False)
-    BsmtQual = Column(String(100), unique=False, nullable=False)
-    BsmtCond = Column(String(100), unique=False, nullable=False)
-    BsmtExposure = Column(String(100), unique=False, nullable=False)
-    BsmtFinType1 = Column(String(100), unique=False, nullable=False)
     BsmtFinSF1 = Column(Integer, unique=False, nullable=False)
-    BsmtFinType2 = Column(String(100), unique=False, nullable=False)
-    BsmtFinSF2 = Column(Integer, unique=False, nullable=False)
-    BsmtUnfSF = Column(Integer, unique=False, nullable=False)
     TotalBsmtSF = Column(Integer, unique=False, nullable=False)
-    Heating = Column(String(100), unique=False, nullable=False)
-    HeatingQC = Column(String(100), unique=False, nullable=False)
-    CentralAir = Column(String(100), unique=False, nullable=False)
-    Electrical = Column(String(100), unique=False, nullable=False)
     FirstFlrSF = Column(Integer, unique=False, nullable=False)
-    SecondFlrSF = Column(Integer, unique=False, nullable=False)
-    LowQualFinSF = Column(Integer, unique=False, nullable=False)
     GrLivArea = Column(Integer, unique=False, nullable=False)
-    BsmtFullBath = Column(Integer, unique=False, nullable=False)
-    BsmtHalfBath = Column(Integer, unique=False, nullable=False)
     FullBath = Column(Integer, unique=False, nullable=False)
-    HalfBath = Column(Integer, unique=False, nullable=False)
-    BedroomAbvGr = Column(Integer, unique=False, nullable=False)
-    KitchenAbvGr = Column(Integer, unique=False, nullable=False)
-    KitchenQual = Column(String(100), unique=False, nullable=False)
     TotRmsAbvGrd = Column(Integer, unique=False, nullable=False)
-    Functional = Column(String(100), unique=False, nullable=False)
     Fireplaces = Column(Integer, unique=False, nullable=False)
-    FireplaceQu = Column(String(100), unique=False, nullable=False)
-    GarageType = Column(String(100), unique=False, nullable=False)
-    GarageYrBlt = Column(String(100), unique=False, nullable=False)
-    GarageFinish = Column(String(100), unique=False, nullable=False)
     GarageCars = Column(Integer, unique=False, nullable=False)
     GarageArea = Column(Integer, unique=False, nullable=False)
-    GarageQual = Column(String(100), unique=False, nullable=False)
-    GarageCond = Column(String(100), unique=False, nullable=False)
-    PavedDrive = Column(String(100), unique=False, nullable=False)
-    WoodDeckSF = Column(Integer, unique=False, nullable=False)
-    OpenPorchSF = Column(Integer, unique=False, nullable=False)
-    EnclosedPorch = Column(Integer, unique=False, nullable=False)
-    ThreeSeasonPorch = Column(Integer, unique=False, nullable=False)
-    ScreenPorch = Column(Integer, unique=False, nullable=False)
-    PoolArea = Column(Integer, unique=False, nullable=False)
-    PoolQC = Column(String(100), unique=False, nullable=False)
-    Fence = Column(String(100), unique=False, nullable=False)
-    MiscFeature = Column(String(100), unique=False, nullable=False)
     PredictedPrice = Column(Float, unique=False, nullable=False)
 
     def __repr__(self):
-        tweet_repr = "<UsageLog=(Usage_id='%s>"
-        return tweet_repr % (self.Usage_id)
+        tweet_repr = "<UsageLog=(Usage_id='%s PredictedPrice='%d>"
+        return tweet_repr % (self.Usage_id, self.PredictedPrice)
 
 
 def create_db(args):

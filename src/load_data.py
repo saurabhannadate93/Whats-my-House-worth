@@ -35,11 +35,12 @@ def run_loading_local(config):
         
         except Exception as e:
             logger.error(e)
+            return
 
 def run_loading_AWS(config, bucket_name):
     '''Fetches the data from the raw source and dumps it on the AWS s3 bucket provided
     
-    All data is dumped at <s3-bucket name>/data/raw
+    All data is dumped at <s3-bucket-name>/data/raw
     
     Args:
         args: Argparse args - should include args.where, args.bucket
@@ -61,6 +62,7 @@ def run_loading_AWS(config, bucket_name):
         
         except Exception as e:
             logger.error(e)
+            return
 
 def load_data(args):
     '''Fetches the data from the raw source and dumps it at the location specified
@@ -84,3 +86,4 @@ def load_data(args):
                     
     else:
         logger.error('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
+        return

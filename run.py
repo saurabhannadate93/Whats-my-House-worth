@@ -21,6 +21,8 @@ logger = logging.getLogger(config['logging']['LOGGER_NAME'])
 
 from src.load_data import load_data
 from src.clean_data import clean_data
+from src.generate_features import generate_features
+from src.train_model import train_model
 from src.log_usage_data import create_db
 
 if __name__ == '__main__':
@@ -47,6 +49,19 @@ if __name__ == '__main__':
     sb_clean.add_argument("--where", default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
     sb_clean.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sb_clean.set_defaults(func=clean_data)
+
+    # Sub-parser for generating the features
+    sb_gen_features = subparsers.add_parser("generate_features", description="Clean the raw data")
+    sb_gen_features.add_argument("--where", default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sb_gen_features.add_argument("--bucket", default="None", help="Destination S3 bucket name")
+    sb_gen_features.set_defaults(func=generate_features)
+
+
+    # Sub-parser for training the model
+    sb_train_model = subparsers.add_parser("train_model", description="Trains the model")
+    sb_train_model.add_argument("--where", default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sb_train_model.add_argument("--bucket", default="None", help="Destination S3 bucket name")
+    sb_train_model.set_defaults(func=train_model)
 
 
     args = parser.parse_args()

@@ -12,3 +12,5 @@ models/*
 data/raw/*
 database/*
 .vscode/
+data/clean/*
+data/features/*

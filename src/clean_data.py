@@ -62,9 +62,11 @@ def run_cleaning_local(config):
 
     except FileNotFoundError:
         logger.error("FileNotFound: Please check whether the input data file exists, or the file name is accurate in the config file and retry.")
+        return
 
     except Exception as e:
         logger.error(e)
+        return
 
     #Cleaning the data
     logger.debug("Raw file successfully loaded. Starting cleaning process.")
@@ -75,6 +77,7 @@ def run_cleaning_local(config):
 
     except Exception as e:
         logger.error(e)
+        return
 
     #Checking for missing values
     logger.debug("Checking for missing values.")
@@ -84,9 +87,14 @@ def run_cleaning_local(config):
         return
 
     logger.debug("Data cleaned. Writing cleaned file now.")
-    raw_data.to_csv(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
-    logger.info('Data has been cleaned and cleaned dataset has been saved at {}'.format(config['clean_data']['save_location']))
-    return
+    try:
+        raw_data.to_csv(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
+    except Exception as e:
+        logger.error(e)
+        return
+    else:
+        logger.info('Data has been cleaned and cleaned dataset has been saved at {}'.format(config['clean_data']['save_location']))
+        return
 
 def run_cleaning_AWS(config, bucket_name):
     '''Cleans the raw training data and creates a new output
@@ -113,6 +121,7 @@ def run_cleaning_AWS(config, bucket_name):
 
     except Exception as e:
         logger.error(e)
+        return
 
     #Cleaning the data
     logger.debug("Raw file successfully loaded. Starting cleaning process.")
@@ -123,20 +132,26 @@ def run_cleaning_AWS(config, bucket_name):
 
     except Exception as e:
         logger.error(e)
+        return
 
     #Checking for missing values
     logger.debug("Checking for missing values.")
     if missing_check(raw_data)[0] == False:
         logger.error('Missing values in fields:{}'.format(missing_check(raw_data)[1]))
         logger.error('Please either impute or drop the fields. The config provides functionality to add the fields to be either imputed by 0 or by "Not_Available"')
-        # return
+        return
 
     logger.debug("Data cleaned. Writing cleaned file now.")
-    raw_data.to_csv(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
-    my_bucket.upload_file(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']),Key=config['clean_data']['save_location'] + "/" + config['clean_data']['output_file_name'])
-    os.remove(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
-    logger.info('Data has been cleaned and cleaned dataset has been saved at {}'.format(bucket_name + "/" +config['clean_data']['save_location']))
-    return
+    try:
+        raw_data.to_csv(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
+        my_bucket.upload_file(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']),Key=config['clean_data']['save_location'] + "/" + config['clean_data']['output_file_name'])
+        os.remove(os.path.join(config['clean_data']['save_location'], config['clean_data']['output_file_name']))
+    except Exception as e:
+        logger.error(e)
+        return
+    else:
+        logger.info('Data has been cleaned and cleaned dataset has been saved at {}'.format(bucket_name + "/" +config['clean_data']['save_location']))
+        return
 
         
 def clean_data(args):
@@ -161,3 +176,4 @@ def clean_data(args):
             
     else:
         logger.error('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
+        return
