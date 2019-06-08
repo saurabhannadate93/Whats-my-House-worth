@@ -2,10 +2,43 @@ logging:
   LOGGER_NAME: 'root'
 
 load_data:
+  save_location: 'data/raw'
   SOURCE_BUCKET: "housing-prices-data"
 
+clean_data:
+  input_file_name: 'train.csv'
+  impute_by_zero:
+    - 'LotFrontage'
+    - 'MasVnrArea'
+  impute_by_NA:
+    - 'Alley'
+    - 'MasVnrType'
+    - 'BsmtQual'
+    - 'BsmtCond'
+    - 'BsmtFinType1'
+    - 'BsmtFinType2'
+    - 'BsmtExposure'
+    - 'Electrical'
+    - 'FireplaceQu'
+    - 'GarageType'
+    - 'GarageYrBlt'
+    - 'GarageFinish'
+    - 'GarageQual'
+    - 'GarageCond'
+    - 'PoolQC'
+    - 'Fence'
+    - 'MiscFeature'
+  delete_fields:
+    - 'MiscVal'
+    - 'MoSold'
+    - 'YrSold'
+    - 'SaleType'
+    - 'SaleCondition'
+  save_location: 'data/clean'
+  output_file_name: 'train_cleaned.csv'
+
 db_config:
-  SQLALCHEMY_DATABASE_URI: 'sqlite:///database/usage_log/msia423.db'
+  SQLALCHEMY_DATABASE_URI: 'sqlite:///database/msia423.db'
   SQLALCHEMY_TRACK_MODIFICATIONS: True
   SQLALCHEMY_ECHO: False  # If true, SQL for queries made will be printed
 
