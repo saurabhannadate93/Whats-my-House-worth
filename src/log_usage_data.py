@@ -12,7 +12,7 @@ import argparse
 import getpass
 import pymysql
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 Base = declarative_base()
 

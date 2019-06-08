@@ -7,7 +7,7 @@ import logging
 import boto3
 import yaml
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 def run_loading_local(config):
     '''Fetches the data from the raw source and dumps it on the local drive
@@ -56,13 +56,13 @@ def run_loading_AWS(config, bucket_name):
             copy_source = {'Bucket': config['load_data']['SOURCE_BUCKET'], 'Key': object['Key']}
             bucket = s32.Bucket(bucket_name)
             logger.info("Copying %s from bucket %s to bucket %s", object['Key'], config['load_data']['SOURCE_BUCKET'], bucket_name)
-            bucket.copy(copy_source, "data/raw/" + object['Key'])
+            bucket.copy(copy_source, config['load_data']['save_location'] + object['Key'])
             logger.info("File successfully copied.")
         
         except Exception as e:
             logger.error(e)
 
-def run_loading(args):
+def load_data(args):
     '''Fetches the data from the raw source and dumps it at the location specified
     
     Args:
@@ -71,7 +71,7 @@ def run_loading(args):
     Returns:
         None
     '''
-    logger.debug('Running the run_loading function')
+    logger.debug('Running the load_data function')
 
     with open(os.path.join("config","config.yml"), "r") as f:
         config = yaml.safe_load(f)
@@ -81,6 +81,6 @@ def run_loading(args):
     
     elif args.where == "AWS":
         run_loading_AWS(config, args.bucket)
-            
+                    
     else:
-        raise ValueError('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
+        logger.error('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')
