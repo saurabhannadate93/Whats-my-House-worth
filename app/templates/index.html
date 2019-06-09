@@ -1,33 +1,89 @@
-<!––https://www.w3schools.com/howto/howto_css_responsive_form.asp––>
-
 <!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link href="static/basic.css" rel="stylesheet">
+    <h1>What's my house worth?</h1>
+
+    <style>
+        
+        body{
+            background-image:url('static/background.jpg');
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 1.0), 90%, rgba(255, 255, 255, 0.0)), url('static/background.jpg');
+            background-size: 100;
+            background-position: center;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        
+        h1{
+            color:black;
+            font-family: serif;
+            font-style: bold;
+            font-style: italic;
+            font-weight: 50;
+            font-size:80px;
+            
+        }
+        
+        h2{
+            color:black;
+            font-family: serif;
+            font-style: bold;
+            font-weight: 50;
+            font-size:40px;            
+        }
+        
+        
+        .form-element{
+            color:black;
+            font-family: Arial;
+            
+            font-weight:bold;
+            font-size:25px;
+            
+        }
+        
+        .button {
+        background-color: rgba(0, 0, 0, 0.76);
+        border: none;
+        color: white;
+        padd  ing: 15px 25px;
+        text-align: center;
+        font-size: 30px;
+        font-family: serif;
+        cursor: pointer;
+        }
+        .button:hover {
+        background-color:rgba(100, 100, 100, 0.76);
+        }
+  
+        .FillBox{
+        font-size: 25px;
+        font-family: Arial;
+        }
+
+        .dropdown{
+        font-size: 25px;
+        font-family: Arial;
+        }
+    </style>
+  
 </head>
 
+
 <body>
-  <h3>
-        <a href = "{{ url_for('index') }}">What's my house worth?</a>
-  </h3>
-  <hr/>
+  
   <div class="container">
     <form action="{{ url_for('check') }}" method=post class=check>
       
-        <div class="col-25">
+        <div class="form-element">
           <label for="GrLivArea">Above grade (ground) living area square feet</label>
-        </div>
-        <div class="col-75">
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" name="GrLivArea" placeholder=0>
+          <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" class ="FillBox" name="GrLivArea" placeholder=0>
         </div>
       <br>
 
-      <div class="col-25">
+      <div class="form-element">
         <label for="GarageCars">Size of garage in car capacity</label>
-      </div>
-      <div class="col-75">
-          <select id="dropdown" name="GarageCars">
+          <select id="dropdown" class ="dropdown" name="GarageCars">
             <option>0</option>
             <option>1</option>
             <option>2</option>
@@ -47,19 +103,15 @@
       </div>
       <br>
 
-      <div class="col-25">
+      <div class="form-element">
         <label for="TotalBsmtSF">Total square feet of basement area</label>
-      </div>
-      <div class="col-75">
-        <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" name="TotalBsmtSF" placeholder=0>
+        <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" class ="FillBox" name="TotalBsmtSF" placeholder=0>
       </div>
       <br>
 
-    <div class="col-25">
+    <div class="form-element">
         <label for="YearBuilt">Year Built</label>
-    </div>
-    <div class="col-75">
-      <select id="dropdown" name="YearBuilt">
+      <select id="dropdown" class ="dropdown" name="YearBuilt">
       <option value=1800>1800</option>
       <option value=1801>1801</option>
       <option value=1802>1802</option>
@@ -284,27 +336,21 @@
     </div>
     <br>
 
-    <div class="col-25">
+    <div class="form-element">
       <label for="1stFlrSF">First Floor square feet</label>
-    </div>
-    <div class="col-75">
-      <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" name="1stFlrSF" placeholder=0>
+      <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" class ="FillBox" name="1stFlrSF" placeholder=0>
     </div>
     <br>
 
-    <div class="col-25">
+    <div class="form-element">
         <label for="GarageArea">Size of garage in square feet</label>
-      </div>
-      <div class="col-75">
-        <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" name="GarageArea" placeholder=0>
+        <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" class ="FillBox" name="GarageArea" placeholder=0>
       </div>
     <br>
 
-    <div class="col-25">
+    <div class="form-element">
       <label for="FullBath">Full bathrooms above grade</label>
-    </div>
-    <div class="col-75">
-        <select id="FullBath" name="FullBath">
+        <select name="FullBath" id="dropdown" class ="dropdown">
           <option value=0>0</option>
           <option value=1>1</option>
           <option value=2>2</option>
@@ -320,11 +366,9 @@
     </div>
     <br>
 
-    <div class="col-25">
+    <div class="form-element">
       <label for="TotRmsAbvGrd">Total rooms above ground</label>
-    </div>
-    <div class="col-75">
-      <select id="TotRmsAbvGrd" name="TotRmsAbvGrd">
+      <select name="TotRmsAbvGrd" id="dropdown" class ="dropdown">
         <option value=0>0</option>
         <option value=1>1</option>
         <option value=2>2</option>
@@ -340,19 +384,15 @@
     </div>
     <br>
 
-    <div class="col-25">
+    <div class="form-element">
       <label for="LotArea">Lot size in square feet</label>
-    </div>
-    <div class="col-75">
-      <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" name="LotArea" placeholder=0>
+      <input type="number" min="0" oninput="validity.valid||(value='');" id="FillBox" class ="FillBox" name="LotArea" placeholder=0>
     </div>
     <br>
     
-    <div class="col-25">
+    <div class="form-element">
       <label for="FirePlaces">Number of Fireplaces</label>
-    </div>
-    <div class="col-75">
-        <select id="FirePlaces" name="FirePlaces">
+        <select name="FirePlaces" id="dropdown" class ="dropdown">
           <option value=0>0</option>
           <option value=1>1</option>
           <option value=2>2</option>
@@ -369,11 +409,12 @@
     <br>
 
     <dl>
-      <input type=submit value="Check">
+      <input type=submit value="Check" class="button">
     </dl>
   </form>
 
   </div>
-  <h4>Expected House Price: {{predicted_price}}</h4>
+  <h2>Expected House Price: ${{predicted_price}}</h2>
+
 </body>
 </html>
