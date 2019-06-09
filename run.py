@@ -24,6 +24,7 @@ from src.clean_data import clean_data
 from src.generate_features import generate_features
 from src.train_model import train_model
 from src.log_usage_data import create_db
+from app.app import run_app
 
 if __name__ == '__main__':
 
@@ -63,6 +64,12 @@ if __name__ == '__main__':
     sb_train_model.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sb_train_model.set_defaults(func=train_model)
 
+
+    # Sub-parser for starting the app
+    sb_run_app = subparsers.add_parser("run_app", description="Trains the model")
+    sb_run_app.add_argument("--where", default="Local", help="'Local' or 'AWS'; The S3 bucket name needs to be provided in case of AWS")
+    sb_run_app.add_argument("--bucket", default="None", help="S3 bucket name from where to source the model")
+    sb_run_app.set_defaults(func=run_app)
 
     args = parser.parse_args()
     args.func(args)
