@@ -4,10 +4,18 @@ import os
 import pandas as pd
 import yaml
 import datetime
+import boto3
+import pymysql
+import numpy as np
+from io import BytesIO
 from flask import Flask, render_template, request, redirect, url_for
 import logging.config
 from src.log_usage_data import usage_log
 from flask_sqlalchemy import SQLAlchemy
+
+pymysql.converters.encoders[np.float64] = pymysql.converters.escape_float
+pymysql.converters.conversions = pymysql.converters.encoders.copy()
+pymysql.converters.conversions.update(pymysql.converters.decoders)
 
 logger = logging.getLogger()
 
@@ -15,7 +23,7 @@ logger = logging.getLogger()
 app = Flask(__name__)
 
 # Configure flask app from flask_config.py
-app.config.from_pyfile(os.path.join("..",'config','flask_config.py'))
+app.config.from_pyfile(os.path.join('..','config','flask_config.py'))
 
 # Initialize the database
 db = SQLAlchemy(app)
@@ -90,12 +98,22 @@ def check():
     except Exception as e:
         logger.error(e)
         return render_template('error.html')
-######################
-    #Loading the model
-    path = os.path.join(app.config['LOCAL_LOCATION'],app.config['MODEL_NAME'])
-    with open(path, "rb") as f:
-        model = pickle.load(f)
-#######################
+    
+    logger.debug("Loading the model now from {}".format(app.config['MODE']))
+    try:
+        if app.config['MODE'] == 'local':
+            path = os.path.join(app.config['LOCAL_LOCATION'],app.config['MODEL_NAME'])
+            with open(path, "rb") as f:
+                model = pickle.load(f)
+        elif app.config['MODE'] == 'AWS':
+            s3 = boto3.resource('s3')
+            with BytesIO() as data:
+                s3.Bucket(app.config['BUCKET_NAME']).download_fileobj(app.config['MODEL_LOCATION'] + "/" + app.config['MODEL_NAME'], data)
+                data.seek(0)    # move back to the beginning after writing
+                model = pickle.load(data)
+    except Exception as e:
+        logger.error(e)
+        return render_template('error.html')
 
     logger.debug("Model successfully loaded. Creating predictions now.")
     try:

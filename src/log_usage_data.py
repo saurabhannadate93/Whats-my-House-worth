@@ -74,7 +74,14 @@ def create_db(args):
                 port = input("PORT:")
                 db_name = input("DATABASE_NAME:")
                 engine_string = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, db_name)
-            
+
+                #Setting the environment variables for app usage
+                os.environ["MYSQL_USER"] = user
+                os.environ["MYSQL_PASSWORD"] = password
+                os.environ["MYSQL_HOST"] = host
+                os.environ["MYSQL_PORT"] = port
+                os.environ["MYSQL_DB"] = db_name
+
             else:
                 logger.info('Creating an RDS database based on environment variables: MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB.')
                 conn_type = "mysql+pymysql"
@@ -98,6 +105,7 @@ def create_db(args):
     
     if args.where in ["AWS", "Local"]:    
         try:
+            Base.metadata.drop_all(engine)
             Base.metadata.create_all(engine)
             logger.info('Database successfully created.')            
     
