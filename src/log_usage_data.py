@@ -65,33 +65,15 @@ def create_db(args):
     elif args.where == "AWS":
         try:
             
-            if args.manual == "yes":
-                logger.info('Creating an RDS database based on user input.')
-                conn_type = "mysql+pymysql"
-                user = input("USER:")
-                password = getpass.getpass("PASSWORD:")
-                host = input("RDS_ENDPOINT:")
-                port = input("PORT:")
-                db_name = input("DATABASE_NAME:")
-                engine_string = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, db_name)
-
-                #Setting the environment variables for app usage
-                os.environ["MYSQL_USER"] = user
-                os.environ["MYSQL_PASSWORD"] = password
-                os.environ["MYSQL_HOST"] = host
-                os.environ["MYSQL_PORT"] = port
-                os.environ["MYSQL_DB"] = db_name
-
-            else:
-                logger.info('Creating an RDS database based on environment variables: MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB.')
-                conn_type = "mysql+pymysql"
-                user = os.environ.get("MYSQL_USER")
-                password = os.environ.get("MYSQL_PASSWORD")
-                host = os.environ.get("MYSQL_HOST")
-                port = os.environ.get("MYSQL_PORT")
-                db_name = os.environ.get("MYSQL_DB")
-                engine_string = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, db_name)
-            
+            logger.info('Creating an RDS database based on environment variables: MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB.')
+            conn_type = "mysql+pymysql"
+            user = os.environ.get("MYSQL_USER")
+            password = os.environ.get("MYSQL_PASSWORD")
+            host = os.environ.get("MYSQL_HOST")
+            port = os.environ.get("MYSQL_PORT")
+            db_name = os.environ.get("MYSQL_DB")
+            engine_string = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, db_name)
+        
             logger.debug('Creating database now.')    
             engine = create_engine(engine_string)            
             logger.debug('Database engine successfully created.')

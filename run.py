@@ -40,8 +40,7 @@ if __name__ == '__main__':
     
     # Sub-parser for creating a database
     sb_create = subparsers.add_parser("create_db", description="Create database to track usage logs")
-    sb_create.add_argument("--where", default="Local", help="'Local' or 'AWS'")
-    sb_create.add_argument("--manual", default="no", help="Set as 'yes' if manually inputing RDS db credentials. Seeks variables from environment by default")
+    sb_create.add_argument("--where", default="Local", help="'Local' or 'AWS'. Seeks variables from environment for AWS by default")
     sb_create.set_defaults(func=create_db)
 
 
