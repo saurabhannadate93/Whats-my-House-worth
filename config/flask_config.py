@@ -1,5 +1,5 @@
 import os
-MODE='AWS' #Local or AWS #change as necessary
+MODE='AWS' #'local' or 'AWS' #change as necessary
 BUCKET_NAME='nw-saurabhannadate-s3' #Necessary if MODE = 'AWS'
 
 DEBUG = True

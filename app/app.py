@@ -32,7 +32,7 @@ db = SQLAlchemy(app)
 logger.debug("Loading the model now from {}".format(app.config['MODE']))
 try:
     if app.config['MODE'] == 'local':
-        path = os.path.join(app.config['LOCAL_LOCATION'],app.config['MODEL_NAME'])
+        path = os.path.join(app.config['MODEL_LOCATION'],app.config['MODEL_NAME'])
         with open(path, "rb") as f:
             model = pickle.load(f)
     elif app.config['MODE'] == 'AWS':
@@ -130,8 +130,10 @@ def check():
         return render_template('error.html')
 
     logger.debug("The predicted price is ${}".format(pred_price))
-
-    logger.debug("Adding new record to database.")
+    if(app.config['MODE']=="AWS"):
+        logger.debug("Adding new record to database in RDS.")
+    else:
+        logger.debug("Adding new record to the local database.")
 
     try:
         new_entry = usage_log(
