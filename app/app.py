@@ -28,6 +28,24 @@ app.config.from_pyfile(os.path.join('..','config','flask_config.py'))
 # Initialize the database
 db = SQLAlchemy(app)
 
+#Loading the model
+logger.debug("Loading the model now from {}".format(app.config['MODE']))
+try:
+    if app.config['MODE'] == 'local':
+        path = os.path.join(app.config['LOCAL_LOCATION'],app.config['MODEL_NAME'])
+        with open(path, "rb") as f:
+            model = pickle.load(f)
+    elif app.config['MODE'] == 'AWS':
+        s3 = boto3.resource('s3')
+        with BytesIO() as data:
+            s3.Bucket(app.config['BUCKET_NAME']).download_fileobj(app.config['MODEL_LOCATION'] + "/" + app.config['MODEL_NAME'], data)
+            data.seek(0)    # move back to the beginning after writing
+            model = pickle.load(data)
+        logger.debug("Model successfully loaded.")
+except Exception as e:
+    logger.error(e)
+    exit()
+
 @app.route('/')
 def homepage():
     """Homepage of this system.
@@ -99,23 +117,6 @@ def check():
         logger.error(e)
         return render_template('error.html')
     
-    logger.debug("Loading the model now from {}".format(app.config['MODE']))
-    try:
-        if app.config['MODE'] == 'local':
-            path = os.path.join(app.config['LOCAL_LOCATION'],app.config['MODEL_NAME'])
-            with open(path, "rb") as f:
-                model = pickle.load(f)
-        elif app.config['MODE'] == 'AWS':
-            s3 = boto3.resource('s3')
-            with BytesIO() as data:
-                s3.Bucket(app.config['BUCKET_NAME']).download_fileobj(app.config['MODEL_LOCATION'] + "/" + app.config['MODEL_NAME'], data)
-                data.seek(0)    # move back to the beginning after writing
-                model = pickle.load(data)
-    except Exception as e:
-        logger.error(e)
-        return render_template('error.html')
-
-    logger.debug("Model successfully loaded. Creating predictions now.")
     try:
         Input_df = pd.DataFrame(columns=['GrLivArea', 'GarageCars', 'TotalBsmtSF', 'YearBuilt', '1stFlrSF', 'GarageArea', 
                         'FullBath', 'LotArea', 'TotRmsAbvGrd', 'Fireplaces'])
@@ -151,7 +152,7 @@ def check():
         db.session.add(new_entry)
         db.session.commit()
         logger.debug("New record added to the database")
-        pred_price_str = '${:,.0f}'.format(pred_price)
+        pred_price_str = "Your house is worth " + '${:,.0f}'.format(pred_price)
         return render_template('index.html', predicted_price = pred_price_str)
     except Exception as e:
         logger.error(e)
@@ -168,9 +169,6 @@ def run_app(args):
         None
     '''
     logger.debug('Running the run_app function')
-
-    with open(os.path.join("config","config.yml"), "r") as f:
-        config = yaml.safe_load(f)
 
     app.run(debug=app.config["DEBUG"], port=app.config["PORT"], host=app.config["HOST"])
 

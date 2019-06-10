@@ -67,8 +67,6 @@ if __name__ == '__main__':
 
     # Sub-parser for starting the app
     sb_run_app = subparsers.add_parser("run_app", description="Starts the app")
-    sb_run_app.add_argument("--where", default="Local", help="'Local' or 'AWS'; The S3 bucket name needs to be provided in case of AWS")
-    sb_run_app.add_argument("--bucket", default="None", help="S3 bucket name from where to source the model")
     sb_run_app.set_defaults(func=run_app)
 
     args = parser.parse_args()
