@@ -151,8 +151,8 @@ def check():
         db.session.add(new_entry)
         db.session.commit()
         logger.debug("New record added to the database")
-        
-        return render_template('index.html', predicted_price = pred_price)
+        pred_price_str = '${:,.0f}'.format(pred_price)
+        return render_template('index.html', predicted_price = pred_price_str)
     except Exception as e:
         logger.error(e)
         traceback.print_exc()

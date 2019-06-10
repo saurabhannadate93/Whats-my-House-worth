@@ -1,18 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="static/basic.css" rel="stylesheet">
+    <style>
+        
+        body{
+            background-image:url('static/background.jpg');
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 1.0), 90%, rgba(255, 255, 255, 0.0)), url('static/background.jpg');
+            background-size: 100;
+            background-position: center;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        
+        
+        h1{
+            color:black;
+            font-family: serif;
+            font-style: bold;
+            font-style: italic;
+            font-weight: 50;
+            font-size:80px;
+            
+        }
+        
+        .alert-link{
+            color:black;
+            font-family: serif;
+            font-style: bold;
+            font-weight: 50;
+            font-size:40px;            
+        }
+
+        .button {
+        background-color: rgba(0, 0, 0, 0.76);
+        border: none;
+        color: white;
+        padd  ing: 15px 25px;
+        text-align: center;
+        font-size: 30px;
+        font-family: serif;
+        cursor: pointer;
+        }
+        .button:hover {
+        background-color:rgba(100, 100, 100, 0.76);
+        }
+
+    </style>
+
 </head>
 
 <body>
-    <h3>
-         <a href = "{{ url_for('index') }}">What's my house worth?</a>
-    </h3>
-
-    <div class="alert alert-danger" role="alert">
-  <p class="alert-link">We're sorry. There was a problem accessing the page. Please try back later. </p>
+    <div class="alert-danger" role="alert">
+      <p class="alert-link">We're sorry. There was a problem accessing the page. Please try back later. </p>
     </div>
+    
+      <div>    
+        <form method = "post" action="{{ url_for('index') }}" >
+            <div>
+                <button type="submit" class="button">Go back to homepage</button>
+            </div>
+        </form>
+      </div>
+
 
 </body>
 </html>
