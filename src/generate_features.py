@@ -1,26 +1,15 @@
 """
-This module contains functions to create features
+This module uses the functions in the features.py to add in more features to the dataset
 
-NOTE: Add to the add_features method as more features need to be developed
 """
 import os
 import logging
 import boto3
 import yaml
 import pandas as pd
+from src.features import add_features
 
 logger = logging.getLogger()
-
-def add_features(df):
-    try:
-        df['RemodelledFlag'] = 'No'
-        df.loc[(df['YearBuilt'] < df['YearRemodAdd']) ,'RemodelledFlag'] = 'Yes'
-    
-    except:
-        raise
-    
-    else:
-        return df
 
 
 def generate_features_local(config):

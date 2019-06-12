@@ -1,6 +1,6 @@
 import logging
  
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 import datetime
@@ -10,27 +10,38 @@ import os
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 
+def impute_by_zero(df, cols):
+    """Imputes the missing values in the list of fields by 0 in the given dataframe
+    """
+    for i in cols:
+        df[i].fillna(0,inplace=True)
 
-class Timer:
-    """Times the code within the with statement and logs the elapsed time when it closes.
+    return df
+def impute_by_NA(df, cols):
+    """Imputes the missing values in the list of fields by "Not_Available" in the given dataframe
+    """
+    for i in cols:
+        df[i].fillna("Not_Available",inplace=True)
+    return df
 
-           Args:
-               function_name(string): Name of function being timed
-               logger (obj:`logging.logger`): Logger to have elapsed time logged to
-   """
-    def __init__(self, function_name, logger):
-        self.logger = logger
-        self.function = function_name
+def missing_check(df):
+    """Imputes the missing values in the list of fields specified by "Not_Available"
 
-    def __enter__(self):
-        self.start = datetime.datetime.now()
-
-        return self
-
-    def __exit__(self, *args):
-        self.end = datetime.datetime.now()
-        self.interval = self.end - self.start
-        self.logger.info("%s took %0.2f seconds", self.function, self.interval.total_seconds())
+    Args:
+        df: Dataframe to be checked
+    
+    Returns:
+        [True]: If the dataframe has no missing, a list is returned with 
+        [False, missing_list]: If the dataframe has missing values, a list is returned with the first element as False and the second element as the list of fields with missing data
+    """
+    missing_list = []
+    for i in df.columns:
+        if df[i].isnull().sum().sum() != 0:
+            missing_list.append(i)
+    if len(missing_list) > 0:
+        return [False, missing_list]
+    else:
+        return [True]
 
 
 def format_sql(sql, replace_sqlvar=None, replace_var=None, python=True):

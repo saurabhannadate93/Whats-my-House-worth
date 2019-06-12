@@ -44,7 +44,7 @@ def create_db(args):
     """Creates a database with the data models inherited from `Base` (Usage_Log).
 
     Args:
-        args: Argparse args - include args args.where and args.manual.
+        args: Argparse args - include args args.where.
 
     Returns:
         None

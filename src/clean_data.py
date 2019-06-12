@@ -9,38 +9,8 @@ import pandas as pd
 
 logger = logging.getLogger()
 
-def impute_by_zero(df, cols):
-    """Imputes the missing values in the list of fields by 0 in the given dataframe
-    """
-    for i in cols:
-        df[i].fillna(0,inplace=True)
-    return df
+from src.helpers.helpers import impute_by_zero, impute_by_NA, missing_check
 
-def impute_by_NA(df, cols):
-    """Imputes the missing values in the list of fields by "Not_Available" in the given dataframe
-    """
-    for i in cols:
-        df[i].fillna("Not_Available",inplace=True)
-    return df
-
-def missing_check(df):
-    """Imputes the missing values in the list of fields specified by "Not_Available"
-
-    Args:
-        df: Dataframe to be checked
-    
-    Returns:
-        [True]: If the dataframe has no missing, a list is returned with 
-        [False, missing_list]: If the dataframe has missing values, a list is returned with the first element as False and the second element as the list of fields with missing data
-    """
-    missing_list = []
-    for i in df.columns:
-        if df[i].isnull().sum().sum() != 0:
-            missing_list.append(i)
-    if len(missing_list) > 0:
-        return [False, missing_list]
-    else:
-        return [True]
 
 def run_cleaning_local(config):
     '''Cleans the raw training data and creates a new output

@@ -1,4 +1,4 @@
-WHERE=local
+WHERE=Local #"Local" or "AWS"
 STORAGE_S3_BUCKET=nw-saurabhannadate-s3
 BUCKET=Scripts
 
