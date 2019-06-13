@@ -2,7 +2,7 @@ WHERE=Local #"Local" or "AWS"
 STORAGE_S3_BUCKET=your_bucket_name
 BUCKET=bin
 
-.PHONY: load_data clean_data generate_features train_model run_app venv
+.PHONY: load_data create_db clean_data generate_features train_model run_app venv
 
 msia423projectEnv/${BUCKET}/activate: requirements.txt
 	test -d msia423projectEnv || virtualenv msia423projectEnv
