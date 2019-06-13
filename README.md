@@ -169,7 +169,7 @@ Depending on where the app is deployed, ensure to go through the following:
 * Keep the default `PORT` of 3000; However, change it if this port is not available
 
 **Setting up AWS CLI**
-AWS CLI needs to be configured in your system for you to fetch the training data. Kindly refer to this [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to set up the same  
+* AWS CLI needs to be configured in your system for you to fetch the training data. Kindly refer to this [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to set up the same  
 
 
 #### Running on AWS
