@@ -13,15 +13,15 @@
 - [Repo structure](#repo-structure)
 - [Running the application](#running-the-application)
   * [1. Initial setup](#1-initial-setup)
-  * [2. Set up environment](#1-set-up-environment)
+  * [2. Set up environment](#2-set-up-environment)
   * [3. Download the data](#3-download-the-data)
   * [4. Initialize the database](#4-initialize-the-database)
   * [5. Clean the data](#5-clean-the-data)
   * [6. Generate features](#6-generate-features)
   * [7. Train model](#7-train-model)
-  * [8. Launch App](#8-train-model)
-- [Make All](make-all)
-- [Testing](#Testing)
+  * [8. Launch App](#8-launch-app)
+- [Make All](#make-all)
+- [Testing](#testing)
 - [Links To notebooks](#links-to-notebooks)
 - [Acknowledgements](#acknowledgements)
 
@@ -406,6 +406,13 @@ In order to unit test the functions, follow the following steps:
 ```
 pytest test_all_functions.py
 ```
+
+## Logging
+All logs are saved at logs/logfile.log
+
+
+
+
 ## Links to Notebooks
 [Exploratory Data Analysis](notebooks/deliver/Exploratory_Data_Analysis.ipynb)
 
