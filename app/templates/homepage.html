@@ -1,0 +1,63 @@
+<!Doctype html>
+<head>
+    
+</head>
+<body>
+    
+    <div>    
+        <form method = "post" action="{{ url_for('index') }}" >
+            <div>
+                <button type="submit" class="button">What's my house worth?</button>
+            </div>
+        </form>
+    </div>
+        
+    
+    <style>
+        
+        body{
+            padding: 250px 0;
+            text-align:center;
+            background-image:url('static/background.jpg');
+            background-image: -webkit-linear-gradient(rgba(200, 200, 200, 0.5), rgba(200, 200, 200, 0.5)), url('static/background.jpg');
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('static/background.jpg');
+            background-size: 100;
+            background-position: center;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        
+        
+        h1{
+            color: purple;
+            font-family: garamond;
+            font-weight: 50;
+            font-size:44px;
+            
+        }
+        
+        h2{
+            color: purple;
+            font-family: serif;
+            font-weight: 50;
+            font-size:24px;
+            
+        }
+        .button {
+        background-color: rgba(0, 0, 0, 0.76);
+        border: none;
+        color: white;
+        padding: 15px 25px;
+        text-align: center;
+        font-size: 60px;
+        font-family: serif;
+        cursor: pointer;
+        font-style: italic;
+        }
+        .button:hover {
+        background-color:rgba(100, 100, 100, 0.76);
+        }
+    </style>
+    
+</body>

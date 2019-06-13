@@ -10,5 +10,8 @@ __pycache__/
 models/*
 !.gitkeep
 data/raw/*
-data/usage_log/*
+database/*
 .vscode/
+data/clean/*
+data/features/*
+logs/

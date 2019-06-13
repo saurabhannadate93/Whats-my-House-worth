@@ -1,0 +1,72 @@
+logging:
+  LOGGER_NAME: 'root'
+
+load_data:
+  save_location: 'data/raw'
+  SOURCE_BUCKET: "housing-prices-data"
+
+clean_data:
+  input_file_name: 'train.csv'
+  impute_by_zero:
+    - 'LotFrontage'
+    - 'MasVnrArea'
+  impute_by_NA:
+    - 'Alley'
+    - 'MasVnrType'
+    - 'BsmtQual'
+    - 'BsmtCond'
+    - 'BsmtFinType1'
+    - 'BsmtFinType2'
+    - 'BsmtExposure'
+    - 'Electrical'
+    - 'FireplaceQu'
+    - 'GarageType'
+    - 'GarageYrBlt'
+    - 'GarageFinish'
+    - 'GarageQual'
+    - 'GarageCond'
+    - 'PoolQC'
+    - 'Fence'
+    - 'MiscFeature'
+  delete_fields:
+    - 'MiscVal'
+    - 'MoSold'
+    - 'YrSold'
+    - 'SaleType'
+    - 'SaleCondition'
+  save_location: 'data/clean'
+  output_file_name: 'train_cleaned.csv'
+
+generate_features:
+  save_location: 'data/features'
+  output_file_name: 'train_with_features.csv'
+
+train_model:
+  model: 'Random_Forest'
+  version: 'v1'     
+  fields:
+      - 'GarageCars'
+      - 'GrLivArea'
+      - 'YearBuilt'
+      - 'TotalBsmtSF'
+      - '1stFlrSF'
+      - 'GarageArea'
+      - 'LotArea'
+      - 'Fireplaces'
+      - 'FullBath'
+      - 'TotRmsAbvGrd'
+  response: 'SalePrice'
+  params:
+    n_estimators: 1000
+    min_samples_leaf: 5
+    oob_score: True
+    max_depth: 16
+    max_features: 6
+    random_state: 12345
+  save_location: 'models'
+
+db_config:
+  SQLALCHEMY_DATABASE_URI: 'sqlite:///database/msia423.db'
+  SQLALCHEMY_TRACK_MODIFICATIONS: True
+  SQLALCHEMY_ECHO: False  # If true, SQL for queries made will be printed
+
