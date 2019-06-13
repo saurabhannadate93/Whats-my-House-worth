@@ -115,6 +115,8 @@ Sprint Sizing Legend:
 │
 ├── deliverables                      <- Contains all deliverables for the project
 │
+├── logs                              <- Contains execution logs
+│
 ├── models                            <- Trained model objects (TMOs), model predictions, and/or model summaries
 │
 ├── notebooks

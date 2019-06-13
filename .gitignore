@@ -14,3 +14,4 @@ database/*
 .vscode/
 data/clean/*
 data/features/*
+logs/
