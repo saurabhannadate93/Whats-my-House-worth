@@ -30,3 +30,4 @@ app: train_model venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py run_app
 
 all: app venv
+	. msia423projectEnv/${BUCKET}/activate;
