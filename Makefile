@@ -1,4 +1,4 @@
-WHERE=Local #"Local" or "AWS"
+WHERE=Local
 STORAGE_S3_BUCKET=your_bucket_name
 BUCKET=bin
 
