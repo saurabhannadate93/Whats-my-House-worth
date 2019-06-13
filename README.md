@@ -22,6 +22,7 @@
   * [8. Launch App](#8-launch-app)
 - [Make All](#make-all)
 - [Testing](#testing)
+- [Logging](#logging)
 - [Links To notebooks](#links-to-notebooks)
 - [Acknowledgements](#acknowledgements)
 
@@ -239,7 +240,7 @@ For the ease of downloading, the raw data has been downloaded and placed in a pu
 #### Running on Local
 Run the following command in command line:
 ```bash
-python run.py fetch
+python run.py load_data
 ```
 
 With `Make`
@@ -252,7 +253,7 @@ Running this code will download the raw data from the s3 bucket and will put it 
 #### AWS
 Run the following command in command line:
 ```bash
-python run.py fetch --where=AWS --bucket=<destination_bucket_name>
+python run.py load_data --where=AWS --bucket=<destination_bucket_name>
 ```
 
 With `Make`
@@ -394,12 +395,6 @@ Run the following command in command line:
 make all
 ```
 
-
-## Exploratory Data Analysis
-
-[Link to the EDA notebook](deliverables/EDA/Exploratory_Data_Analysis.md) 
-
-
 ## Testing
 
 In order to unit test the functions, follow the following steps:
@@ -410,7 +405,7 @@ pytest test_all_functions.py
 ```
 
 ## Logging
-All logs are saved at logs/logfile.log
+All logs are saved at **logs/logfile.log**
 
 
 
