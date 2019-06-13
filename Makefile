@@ -1,6 +1,6 @@
 WHERE=Local
 STORAGE_S3_BUCKET=your_bucket_name
-BUCKET=bin
+BUCKET=Scripts
 
 .PHONY: load_data create_db clean_data generate_features train_model run_app venv
 
@@ -17,7 +17,7 @@ load_data: venv
 create_db: venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py create_db --where=${WHERE}
 
-clean_data: load_data venv
+clean_data: load_data create_db venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py clean_data --where=${WHERE} --bucket=${STORAGE_S3_BUCKET}
 
 generate_features: clean_data venv
