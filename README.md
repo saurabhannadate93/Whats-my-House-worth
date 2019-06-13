@@ -263,7 +263,7 @@ make load_data
 Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
 
 
-### 3. Initialize the database
+### 4. Initialize the database
 
 #### Local
 Run the following command in command line:
@@ -293,7 +293,7 @@ make create_db
 Running this code will create the database specified in the given RDS instance 
 
 
-### 4. Clean the data
+### 5. Clean the data
 
 #### Local
 Run the following command in command line:
@@ -320,7 +320,7 @@ make clean_data
 Running this code will clean the raw data from the S3 bucket and will put it in **<destination_bucket_name>/clean/**
 
 
-### 5. Generate features
+### 6. Generate features
 
 #### Local
 Run the following command in command line:
@@ -346,7 +346,7 @@ make generate_features
 ```
 Running this code will clean the raw data from the S3 bucket and will put it in **<destination_bucket_name>/clean/**
 
-### 6. Train Model
+### 7. Train Model
 
 #### Local
 Run the following command in command line:
@@ -372,7 +372,7 @@ make train_model
 ```
 Running this code will clean the raw data from the S3 bucket and will put it in **<destination_bucket_name>/models/**
 
-### 7. Launch app
+### 8. Launch app
 
 #### Local or AWS
 Run the following command in command line:
