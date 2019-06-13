@@ -1,6 +1,6 @@
 WHERE=Local
 STORAGE_S3_BUCKET=your_bucket_name
-BUCKET=Scripts
+BUCKET=bin
 
 .PHONY: load_data create_db clean_data generate_features train_model run_app venv
 
