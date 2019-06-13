@@ -1,3 +1,8 @@
+"""
+This module contains all functionality of the flask app
+
+"""
+
 import pickle
 import traceback
 import os
@@ -165,7 +170,7 @@ def run_app(args):
     '''Runs the app
     
     Args:
-        args: Argparse args - includes args.where, args.manual
+        None
         
     Returns:
         None

@@ -2,7 +2,7 @@ import os
 MODE='Local' #'Local' or 'AWS' #change as necessary
 BUCKET_NAME='nw-saurabhannadate-s3' #Necessary if MODE = 'AWS'
 
-DEBUG = True
+DEBUG = False
 LOGGING_CONFIG = "config/logging_local.conf"
 
 PORT = 3000

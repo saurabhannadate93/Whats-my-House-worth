@@ -1,3 +1,8 @@
+"""
+This module contains functions to create the database to log usage data
+
+"""
+
 import os
 import logging
 import logging.config
@@ -44,7 +49,8 @@ def create_db(args):
     """Creates a database with the data models inherited from `Base` (Usage_Log).
 
     Args:
-        args: Argparse args - include args args.where.
+        args: Argparse args - include args args.where
+            args.where:  'Local' or 'AWS'
 
     Returns:
         None

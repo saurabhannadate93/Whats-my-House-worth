@@ -125,10 +125,12 @@ def run_cleaning_AWS(config, bucket_name):
 
         
 def clean_data(args):
-    '''Fetches the data from the raw folder and cleans it
+    '''Main function to fetch the data from the raw folder and clean it
     
     Args:
-        args: Argparse args - includes args.where
+        args: Argparse args - includes args.where, args.bucket 
+            args.where: 'Local' or 'AWS'
+            args.bucket (required if args.where = 'AWS'): S3 bucket for all analysis
         
     Returns:
         None

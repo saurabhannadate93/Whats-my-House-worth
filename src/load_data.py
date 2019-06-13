@@ -12,8 +12,10 @@ logger = logging.getLogger()
 def run_loading_local(config):
     '''Fetches the data from the raw source and dumps it on the local drive
     
+    All raw data is dumped at /data/raw
+
     Args:
-        None
+        config: Config dictionary
         
     Returns:
         None
@@ -38,12 +40,13 @@ def run_loading_local(config):
             return
 
 def run_loading_AWS(config, bucket_name):
-    '''Fetches the data from the raw source and dumps it on the AWS s3 bucket provided
+    '''Fetches the data from the raw source and dumps it on the AWS S3 bucket provided
     
     All data is dumped at <s3-bucket-name>/data/raw
     
     Args:
-        args: Argparse args - should include args.where, args.bucket
+        config: Config dictionary
+        bucket_name: target bucket name used for all analysis
         
     Returns:
         None
@@ -68,7 +71,9 @@ def load_data(args):
     '''Fetches the data from the raw source and dumps it at the location specified
     
     Args:
-        args: Argparse args - includes args.where, args.manual
+        args: Argparse args - includes args.where, args.bucket 
+            args.where: 'Local' or 'AWS'
+            args.bucket (required if args.where = 'AWS'): S3 bucket for all analysis
         
     Returns:
         None

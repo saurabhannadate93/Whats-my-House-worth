@@ -108,7 +108,9 @@ def generate_features(args):
     '''Generates the features required for modeling
     
     Args:
-        args: Argparse args - includes args.where
+        args: Argparse args - includes args.where, args.bucket 
+            args.where: 'Local' or 'AWS'
+            args.bucket (required if args.where = 'AWS'): S3 bucket for all analysis
         
     Returns:
         None

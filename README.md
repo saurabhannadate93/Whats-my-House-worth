@@ -276,7 +276,7 @@ With `Make`
 make create_db
 ```
 
-Running this code will create a sqlite database to log the app usage at: **/Data/usage_log/msia423.db**
+Running this code will create a sqlite database to log the app usage at: **/Database/msia423.db**
 
 #### AWS
 

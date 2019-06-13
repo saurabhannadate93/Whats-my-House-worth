@@ -72,7 +72,8 @@ def train_model_AWS(config, bucket_name):
     The trained model is saved in <s3-bucket-name>/models/<model-name>
 
     Args:  
-        config: config dictionary
+        config: Config dictionary
+        bucket_name: target bucket name used for all analysis
  
     Returns: None
     """
@@ -134,7 +135,10 @@ def train_model(args):
     '''Trains the model based on the configurations provided
     
     Args:
-        args: Argparse args - includes args.where
+        args: Argparse args - includes args.where, args.bucket 
+            args.where: 'Local' or 'AWS'
+            args.bucket (required if args.where = 'AWS'): S3 bucket for all analysis
+            
         
     Returns:
         None
