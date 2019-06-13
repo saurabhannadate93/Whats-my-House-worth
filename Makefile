@@ -18,7 +18,7 @@ create_db: venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py create_db --where=${WHERE}
 
 clean_data: load_data venv
-	. msia423projectEnv/${BUCKET}/activate; python run.py clean_data --where=${WHERE} --bucket=${STORAGE_S3_BUCKET
+	. msia423projectEnv/${BUCKET}/activate; python run.py clean_data --where=${WHERE} --bucket=${STORAGE_S3_BUCKET}
 
 generate_features: clean_data venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py generate_features --where=${WHERE} --bucket=${STORAGE_S3_BUCKET}
