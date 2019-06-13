@@ -70,8 +70,3 @@ db_config:
   SQLALCHEMY_TRACK_MODIFICATIONS: True
   SQLALCHEMY_ECHO: False  # If true, SQL for queries made will be printed
 
-app_config:
-  PORT: 3000
-  APP_NAME: "housing-prices"
-  HOST: "127.0.0.1"
-

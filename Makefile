@@ -1,6 +1,6 @@
 WHERE=Local #"Local" or "AWS"
 STORAGE_S3_BUCKET=nw-saurabhannadate-s3
-BUCKET=Scripts
+BUCKET=bin
 
 .PHONY: load_data clean_data generate_features train_model run_app venv
 
@@ -25,3 +25,5 @@ train_model: generate_features venv
 
 app: train_model venv
 	. msia423projectEnv/${BUCKET}/activate; python run.py run_app
+
+all: app venv
